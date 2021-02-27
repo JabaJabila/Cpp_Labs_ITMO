@@ -220,6 +220,12 @@ RegularPolygon::RegularPolygon(Point * ps, size_t size) : Polygon(ps, size) {
 		throw std::logic_error("It's not a regular polygon!!!");
 }
 
+RegularPolygon::RegularPolygon(Point center, unsigned n_sides, double size_len) 
+		: count(n_sides)
+		, angle((((double)(n_sides - 2)) / n_sides) * 180)
+		, segmentlen(fabs(size_len))
+		, Polygon(build_rpoly(center, n_sides, size_len)) {}
+
 double RegularPolygon::area() const {
 	double r = segmentlen / (2 * sin(PI / count)) * cos(PI / count);
 	double per = perimeter();
