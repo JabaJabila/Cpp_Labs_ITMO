@@ -166,11 +166,7 @@ public:
 	RegularPolygon() = delete;
 	explicit RegularPolygon(std::vector<Point> & ps);
 	RegularPolygon(Point * ps, size_t size);
-	explicit RegularPolygon(Point center, unsigned n_sides = 3, double size_len = 1) 
-		: count(n_sides)
-		, angle((((double)(n_sides - 2)) / n_sides) * 180)
-		, segmentlen(fabs(size_len))
-		, Polygon(build_rpoly(center, n_sides, size_len)) {}
+	explicit RegularPolygon(Point center, unsigned n_sides = 3, double size_len = 1);
 	RegularPolygon(RegularPolygon const & other) = default;
 	RegularPolygon & operator=(RegularPolygon const & other) = default;
 	~RegularPolygon() = default;
