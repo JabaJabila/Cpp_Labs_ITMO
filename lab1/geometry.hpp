@@ -178,7 +178,7 @@ public:
 	double get_angle() const {return angle;}
 	double get_segmentlen() const {return segmentlen;}
 	double perimeter() const {return segmentlen * count;};
-	double area() const {return Polygon::area();}
+	double area() const;
 
 private:
 	static std::vector<Point> build_rpoly(Point & center, unsigned n, double side);

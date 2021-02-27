@@ -230,7 +230,7 @@ int main() {
 	Shape * shapes[] = {&pg1, &tri1, &trp1, &trp2, &rp1, &rp3};
 
 	for (size_t i = 0; i < 6; i++) {
-		std::cout << "Фигура №" << i + 1 << ": кол-во вершин - " << shapes[i]->get_components().size() << ' ';
+		std::cout << "Фигура №" << i + 1 << ": кол-во вершин - " << shapes[i]->get_components().size();
 		std::cout << ", периметр = "<< shapes[i]->perimeter() << ", площадь = " << shapes[i]->area() << '\n';
 	}
 
