@@ -21,8 +21,8 @@ int main() {
 		E == A ? std::cout << "Точка E равна точке A\n" : std::cout << "Точка E не равна точке A\n";
 		A == B ? std::cout << "Точка A равна точке B\n" : std::cout << "Точка A не равна точке B\n";
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 	Segment s1(A, B);
@@ -40,8 +40,8 @@ int main() {
 
 		Segment s0(A, A);
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 
@@ -97,8 +97,8 @@ int main() {
 
 		ClosedPolyline cl3(points2);
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 	std::cout << "\n\n---------------- ТЕСТ #4 ----------------\n";
@@ -159,8 +159,8 @@ int main() {
 		std::cout << "\nПопытка создать невыпуклый многоугольник:\n";
 		Polygon pg2(points5);
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 	Triangle tri1(points6, 3);
@@ -173,8 +173,8 @@ int main() {
 		std::cout << "\nПопытка создать тругольник с 4 вершинами:\n";
 		Triangle tri2(points5);
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 	Trapezoid trp1(points8);
@@ -192,8 +192,8 @@ int main() {
 		Trapezoid trp3(points7);
 
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 	RegularPolygon rp1(points10);
@@ -207,8 +207,8 @@ int main() {
 		RegularPolygon rp3(points7);
 
 	}
-	catch (const char * exception) {
-		std::cerr << "Error: " << exception << '\n';
+	catch (const std::logic_error & err) {
+		std::cerr << "Error: " << err.what() << '\n';
 	}
 
 

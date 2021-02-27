@@ -2,7 +2,7 @@
 
 Segment::Segment(Point d1, Point d2) : d1(d1), d2(d2) {
 	if (d1 == d2)
-		throw "Impossible to create a segment with start point mathces end point!!!";
+		throw std::logic_error("Impossible to create a segment with start point mathces end point!!!");
 }
 
 double Segment::length() const {
@@ -21,7 +21,7 @@ Polyline::Polyline(std::vector<Point> & ps) : points(ps) {
 	if (points.size() >= 2)
 		delete_repeated();
 	if (points.size() < 2)
-		throw "Impossible to create a polyline with less than 2 points";
+		throw std::logic_error("Impossible to create a polyline with less than 2 points");
 }
 
 Polyline::Polyline(Point * ps, size_t size) {
@@ -31,7 +31,7 @@ Polyline::Polyline(Point * ps, size_t size) {
 		delete_repeated();
 	}
 	if (size < 2 || points.size() < 2)
-		throw "Impossible to create a polyline with less than 2 points";
+		throw std::logic_error("Impossible to create a polyline with less than 2 points");
 }
 
 double Polyline::length() const {
@@ -60,13 +60,13 @@ void Polyline::delete_repeated() {
 ClosedPolyline::ClosedPolyline(std::vector<Point> & ps) : Polyline(ps) {
 	check_closed();
 	if (points.size() < 3)
-		throw "Impossible to create a closed polyline with less than 3 points";
+		throw std::logic_error("Impossible to create a closed polyline with less than 3 points");
 }
 
 ClosedPolyline::ClosedPolyline(Point * ps, size_t size) : Polyline(ps, size) {
 	check_closed();
 	if (points.size() < 3)
-		throw "Impossible to create a closed polyline with less than 3 points";
+		throw std::logic_error("Impossible to create a closed polyline with less than 3 points");
 }
 
 double ClosedPolyline::length() const {
@@ -84,10 +84,10 @@ void ClosedPolyline::check_closed() {
 Polygon::Polygon(const std::vector<Point> & ps) : points(ps) {
 	delete_repeated();
 	if (points.size() < 3)
-		throw "Impossible to create a polygon with less than 3 points";
+		throw std::logic_error("Impossible to create a polygon with less than 3 points");
 	if (points.size() >= 4)
 		if (!check_convexity())
-			throw "Polygon isn't convex!!!";
+			throw std::logic_error("Polygon isn't convex!!!");
 }
 
 Polygon::Polygon(Point * ps, size_t size) {
@@ -97,10 +97,10 @@ Polygon::Polygon(Point * ps, size_t size) {
 		delete_repeated();
 	}
 	if (size < 3 || points.size() < 3)
-		throw "Impossible to create a polygon with less than 3 points";
+		throw std::logic_error("Impossible to create a polygon with less than 3 points");
 	if (points.size() >= 4)
 		if (!check_convexity())
-			throw "Polygon isn't convex!!!";
+			throw std::logic_error("Polygon isn't convex!!!");
 }
 
 double Polygon::perimeter() const {
@@ -168,12 +168,12 @@ void Polygon::delete_repeated() {
 
 Triangle::Triangle(std::vector<Point> & ps) : Polygon(ps) {
 	if (points.size() != 3)
-		throw "It's not a triangle!!!";
+		throw std::logic_error("It's not a triangle!!!");
 }
 
 Triangle::Triangle(Point * ps, size_t size) : Polygon(ps, size) {
 	if (points.size() != 3)
-		throw "It's not a triangle!!!";
+		throw std::logic_error("It's not a triangle!!!");
 }
 
 double Triangle::area() const {
@@ -187,12 +187,12 @@ double Triangle::area() const {
 
 Trapezoid::Trapezoid(std::vector<Point> & ps) : Polygon(ps) {
 	if (points.size() != 4 || !check_parallel())
-	throw "It's not a trapezoid!!!";
+	throw std::logic_error("It's not a trapezoid!!!");
 }
 
 Trapezoid::Trapezoid(Point * ps, size_t size) : Polygon(ps, size) {
 	if (points.size() != 4 || !check_parallel())
-		throw "It's not a trapezoid!!!";
+		throw std::logic_error("It's not a trapezoid!!!");
 }
 
 bool Trapezoid::check_parallel() {
@@ -212,12 +212,12 @@ bool Trapezoid::check_parallel() {
 
 RegularPolygon::RegularPolygon(std::vector<Point> & ps) : Polygon(ps) {
 	if (!check_regularity())
-		throw "It's not a regular polygon!!!";
+		throw std::logic_error("It's not a regular polygon!!!");
 }
 
 RegularPolygon::RegularPolygon(Point * ps, size_t size) : Polygon(ps, size) {
 	if (!check_regularity())
-		throw "It's not a regular polygon!!!";
+		throw std::logic_error("It's not a regular polygon!!!");
 }
 
 double RegularPolygon::area() const {

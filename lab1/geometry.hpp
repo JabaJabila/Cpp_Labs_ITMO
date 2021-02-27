@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <cmath>
+#include <stdexcept>
 
 #define PI 3.14159265
 
