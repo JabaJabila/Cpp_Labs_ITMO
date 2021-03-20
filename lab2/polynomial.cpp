@@ -17,7 +17,7 @@ public:
 	~Polynomial() = default;
 
 	size_t get_size() const {return size_;}
-	std::vector<double> get_components() const {return components_;}
+	const std::vector<double> & get_components() const {return components_;}
 
 	bool operator==(Polynomial const & other) const {
 		if (size_ != other.size_)
@@ -72,7 +72,17 @@ public:
 		return *this;
 	}
 
-	Polynomial & operator-=(Polynomial const & right) {return *this+=(-right);}
+	Polynomial & operator-=(Polynomial const & right) {
+		size_t num;
+		size_ > right.size_ ? num = right.size_ : num = size_;
+		for (size_t i = 0; i < num; ++i)
+			components_[i] -= right[i];
+		right.size_ > size_ ? size_ = right.size_ : size_;
+		for (size_t i = num; i < size_; ++i)
+			components_.push_back(-right[i]);
+
+		return *this;
+	}
 
 	Polynomial & operator+=(double const right) {
 		components_[0] += right;
@@ -102,6 +112,7 @@ public:
 	Polynomial & operator/=(const double right) {return *this*=(1/right);}
 
 	friend std::ostream & operator<<(std::ostream &, const Polynomial &);
+	friend std::istream & operator>>(std::istream & stream, Polynomial & poly);
 
 private:
 	std::vector<double> components_;
@@ -116,12 +127,20 @@ Polynomial operator+(Polynomial const & left, Polynomial const & right) {
 }
 
 Polynomial operator+(Polynomial const & left, const double right) {
-	std::vector<double> tmp = {right};
-	return left + Polynomial(tmp);
+	Polynomial tmp = left;
+	return tmp += right;
 }
 
-Polynomial operator-(Polynomial const & left, Polynomial const & right) {return (left + (-right));}
-Polynomial operator-(Polynomial const & left, const double right) {return (left + (-right));}
+Polynomial operator-(Polynomial const & left, Polynomial const & right) {
+	Polynomial tmp = left;
+	return tmp -= right;
+}
+
+Polynomial operator-(Polynomial const & left, const double right) {
+	Polynomial tmp = left;
+	return tmp -= right;
+}
+
 Polynomial operator+(const double left, Polynomial const & right) {return right + left;}
 Polynomial operator-(const double left, Polynomial const & right) {return -right + left;}
 
@@ -166,10 +185,19 @@ std::istream & operator>>(std::istream & stream, Polynomial & poly) {
 	std::vector<double> v;
 	while (stream >> x)
 		v.push_back(x);
-	Polynomial tmp(v);
-	poly = tmp;
+	poly.components_ = v;
+	poly.size_ = v.size();
 	return stream;
 }
+
+
+
+
+
+
+
+
+// ------------------------------------------------------------------------------------------------
 
 // int main() {                                // TESTS
 // 	std::vector<double> v1 = {4, -4, 1};
@@ -182,23 +210,10 @@ std::istream & operator>>(std::istream & stream, Polynomial & poly) {
 
 // 	Polynomial p1(v1);
 // 	Polynomial p2(array, 3);
-// 	Polynomial p3(v2);
+// 	Polynomial p3(v3);
 
-// 	std::cout << p1 << "\n";
-// 	std::cout << p3 << "\n";
-// 	std::cout << (p1 == p3) << "\n";
-// 	std::cout << (p1 != p3) << "\n";
-// 	std::cout << (p1 > p3) << "\n";
-// 	std::cout << (p1 < p3) << "\n";
-// 	std::cout << (p1 >= p3) << "\n";
-// 	std::cout << (p1 <= p3) << "\n";
-// 	p1 = p3;
-// 	std::cout << (p1 == p3) << "\n";
-// 	std::cout << (p1 != p3) << "\n";
-// 	std::cout << (p1 > p3) << "\n";
-// 	std::cout << (p1 < p3) << "\n";
-// 	std::cout << (p1 >= p3) << "\n";
-// 	std::cout << (p1 <= p3) << "\n";
+// 	std::cout << p3 << "\n" << p1 << "\n" << 1 - p3 << "\n";
+	
 
 // 	delete [] array;
 
