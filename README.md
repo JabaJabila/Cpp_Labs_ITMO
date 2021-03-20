@@ -1,6 +1,6 @@
 # Cpp_Labs_ITMO
 
-ITMO University, ITIP faculty, year 2021
+ITMO University, ITP faculty, year 2021
 C++ programming laboratory works, first year bachelor student, 2nd semester
 by Andreev Artem
 
