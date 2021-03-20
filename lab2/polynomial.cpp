@@ -3,10 +3,7 @@
 
 class Polynomial {
 public:
-	Polynomial() {
-		components_ = {0};
-		size_ = 1;
-	}
+	Polynomial() : components_({0}), size_(1) {}
 	explicit Polynomial(std::vector<double> & comps) : components_(comps), size_(comps.size()) {};
 
 	Polynomial(double * array, size_t size) {
@@ -31,10 +28,28 @@ public:
 		return true;
 	}
 
+	bool operator!=(Polynomial const & other) const {return !(*this == other);}
+
+	bool operator>(Polynomial const & other) const {
+		if (size_ > other.size_)
+			return true;
+		if (size_ < other.size_)
+			return false;
+		for (size_t i = size_; i > 0; i--) {
+			if (components_[i - 1] > other[i - 1])
+				return true;
+			if (components_[i - 1] < other[i - 1])
+				return false;
+		}
+		return false;
+	}
+
+	bool operator<(Polynomial const & other) const {return (other > *this);}
+	bool operator>=(Polynomial const & other) const {return (*this > other || *this == other);}
+	bool operator<=(Polynomial const & other) const {return (*this < other || *this == other);}
+
 	const double & operator[](const size_t index) const {return components_[index];}
 	double & operator[](const size_t index) {return components_[index];}
-
-	bool operator!=(Polynomial const & other) const {return !(*this == other);}
 
 	Polynomial operator-() const {
 		Polynomial new_poly(*this);
@@ -156,7 +171,7 @@ std::istream & operator>>(std::istream & stream, Polynomial & poly) {
 	return stream;
 }
 
-// int main() {                            // TESTS
+// int main() {                                // TESTS
 // 	std::vector<double> v1 = {4, -4, 1};
 // 	std::vector<double> v2 = {-5, 2};
 // 	std::vector<double> v3 = {-8, 1, -4, 2};
@@ -168,17 +183,22 @@ std::istream & operator>>(std::istream & stream, Polynomial & poly) {
 // 	Polynomial p1(v1);
 // 	Polynomial p2(array, 3);
 // 	Polynomial p3(v2);
-// 	Polynomial p4;
-// 	Polynomial p0 = p3;
-// 	std::cin >> p4;
-
 
 // 	std::cout << p1 << "\n";
 // 	std::cout << p3 << "\n";
-// 	std::cout << p1 * p3 << "\n";
-// 	std::cout << p4 / 2 << "\n";
-
-
+// 	std::cout << (p1 == p3) << "\n";
+// 	std::cout << (p1 != p3) << "\n";
+// 	std::cout << (p1 > p3) << "\n";
+// 	std::cout << (p1 < p3) << "\n";
+// 	std::cout << (p1 >= p3) << "\n";
+// 	std::cout << (p1 <= p3) << "\n";
+// 	p1 = p3;
+// 	std::cout << (p1 == p3) << "\n";
+// 	std::cout << (p1 != p3) << "\n";
+// 	std::cout << (p1 > p3) << "\n";
+// 	std::cout << (p1 < p3) << "\n";
+// 	std::cout << (p1 >= p3) << "\n";
+// 	std::cout << (p1 <= p3) << "\n";
 
 // 	delete [] array;
 
