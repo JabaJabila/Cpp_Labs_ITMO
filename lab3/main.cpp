@@ -21,7 +21,7 @@ double dist(double x1, double y1, double x2, double y2) {
 	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
-std::pair<double, double> get_coordinates(std::string str) {
+std::pair<double, double> split_coordinates(std::string & str) {
 	std::pair<double, double> tmp;
 	unsigned pos;
 	pos = str.find(",");
@@ -33,7 +33,7 @@ std::pair<double, double> get_coordinates(std::string str) {
 	return tmp;
 }
 
-std::vector<std::string> get_routes(std::string str) {
+std::vector<std::string> split_routes(std::string & str) {
 	std::vector<std::string> tmp;
 	unsigned pos;
 	std::string x;
@@ -56,7 +56,7 @@ std::vector<std::string> get_routes(std::string str) {
 	return tmp;
 }
 
-std::vector<std::string> get_locations(std::string str) {
+std::vector<std::string> split_locations(std::string & str) {
 	std::vector<std::string> tmp;
 	unsigned pos;
 	std::string x;
@@ -249,8 +249,8 @@ int main() {
     pugi::xml_parse_result result = doc.load_file("data.xml");
 
     if (!result) {
-    	throw std::exception();
-        return 1;
+    	std::cout << "Ошибка! Невозможно обработать xml файл...";
+    	return 1;
     }
 
     pugi::xml_node data = doc.child("dataset");
@@ -272,9 +272,9 @@ int main() {
         routestr = tool.child("routes").first_child().value();
         coords = tool.child("coordinates").first_child().value();
 
-       	coordinates = get_coordinates(coords);
-       	routes = get_routes(routestr);
-       	locations = get_locations(loc);
+       	coordinates = split_coordinates(coords);
+       	routes = split_routes(routestr);
+       	locations = split_locations(loc);
 
        	// std::cout << type_vehicle << "\n" << name << "\n" << off_name << "\n";
        	// std::cout << std::setprecision(10) << coordinates.first << " - " << coordinates.second << "\n";
@@ -317,9 +317,9 @@ int main() {
     std::pair<std::string, double> task2_tram = find_max_route(stopping_tram);
     std::pair<std::string, double> task2_trolley = find_max_route(stopping_trolley);
     std::cout << "\nНайден самый длинный автобусный маршрут. Это маршрут №" << task2_bus.first << \
-    			 " с длинной маршрута примерно = : " << task2_bus.second << " метров\n";
+    			 " с длинной маршрута примерно = " << task2_bus.second << " метров\n";
     std::cout << "\nНайден самый длинный трамвайный маршрут. Это маршрут №" << task2_tram.first << \
-    			 " с длинной маршрута примерно = : " << task2_tram.second << " метров\n";
+    			 " с длинной маршрута примерно = " << task2_tram.second << " метров\n";
     std::cout << "\nНайден самый длинный троллейбусный маршрут. Это маршрут №" << task2_trolley.first << \
     			 " с длинной маршрута примерно = " << task2_trolley.second << " метров\n";
 
