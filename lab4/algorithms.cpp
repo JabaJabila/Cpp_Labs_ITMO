@@ -38,8 +38,8 @@ bool one_of(InputIterator begin, InputIterator end, UnaryPredicate p) {
 	return result;
 }
 
-template<class InputIterator, class BinaryPredicate>
-bool is_sorted(InputIterator begin, InputIterator end, BinaryPredicate p) {
+template<class InputIterator, class Comparator>
+bool is_sorted(InputIterator begin, InputIterator end, Comparator p) {
 	InputIterator next = begin;
 	++next;
 	--end;
@@ -63,8 +63,8 @@ bool is_partitioned(InputIterator begin, InputIterator end, UnaryPredicate p) {
 	return true;
 }
 
-template<class InputIterator, class BinaryPredicate>
-bool is_palindrome(InputIterator begin, InputIterator end, BinaryPredicate p) {
+template<class InputIterator, class Comparator>
+bool is_palindrome(InputIterator begin, InputIterator end, Comparator p) {
 	size_t mid = distance(begin, end) / 2;
 	--end;
 	for (size_t i = 0; i < mid; ++i) {
@@ -177,6 +177,7 @@ int main() {
 	// std::vector<int> t6 {1, 2, 4, 8, 3, 2, 1};
 	// std::vector<int> t7 {1, 3, 5, 4, 3, 1};
 	// std::vector<int> t8 {1, 3, 6, 8, 7, 9};
+	// std::deque<int> t9 {1, 1, 1, 1, 1, 1, 8, 1, 9};
 
 	// std::cout << all_of(t1.begin(), t1.end(), isGreaterThan(0)) << '\n';
 	// std::cout << all_of(t1.begin(), t1.end(), isGreaterThan(1)) << '\n';
@@ -194,17 +195,17 @@ int main() {
 	// std::cout << one_of(t2.begin(), t2.end(), isGreaterThan(0)) << '\n';
 	// std::cout << one_of(t1.begin(), t1.end(), isGreaterThan(10)) << '\n';
 	// std::cout << one_of(t2.begin(), t2.end(), isGreaterThan(50)) << '\n'; 
-	// std::cout << one_of(t2.begin(), t2.end(), isEven) << '\n';
+	// std::cout << one_of(t2.begin(), t2.end(), isEven) << '\n' << '\n';
 
-	// std::vector<int>::iterator it1 = find_backward(t2.begin(), t2.end(), 7);
+	// std::vector<int>::iterator it1 = find_backward(t2.begin(), t2.end(), -2);
 	// std::deque<int>::iterator it2;
 	// std::cout << (it1 == t2.end() ? -1 : distance(t2.begin(), it1)) << '\n';
-	// it1 = find_backward(t2.begin(), t2.end(), -1);
-	// std::cout << (it1 == t2.end() ? -1 : distance(t2.begin(), it1)) << '\n';
-	// it2 = find_not(t3.begin(), t3.end(), 7);
-	// std::cout << (it2 == t3.end() ? -1 : distance(t3.begin(), it2)) << '\n';
-	// it2 = find_not(t3.begin(), t3.begin() + 5, 7);
-	// std::cout << (it2 == t3.begin() + 5 ? -1 : distance(t3.begin(), it2)) << '\n';
+	// it1 = find_backward(t4.begin(), t4.end(), 2);
+	// std::cout << (it1 == t4.end() ? -1 : distance(t4.begin(), it1)) << '\n';
+	// it2 = find_not(t9.begin(), t9.end(), 1);
+	// std::cout << (it2 == t9.end() ? -1 : distance(t9.begin(), it2)) << '\n';
+	// it2 = find_not(t9.begin(), t9.begin() + 6, 1);
+	// std::cout << (it2 == t9.begin() + 6 ? -1 : distance(t9.begin(), it2)) << '\n' << '\n';
 
 	// std::cout << is_sorted(t2.begin(), t2.end(), isLess<int>) << '\n';
 	// std::cout << is_sorted(t3.begin(), t3.end(), isGreater<int>) << '\n';
@@ -220,7 +221,7 @@ int main() {
 
 	// std::cout << is_partitioned(t2.begin(), t2.begin(), isEven) << '\n';
 	// std::cout << is_partitioned(t8.begin(), t8.end(), isGreaterThan(4)) << '\n';
-	// std::cout << is_partitioned(t4.begin(), t4.end(), isEven) << '\n';
+	// std::cout << is_partitioned(t4.begin(), t4.end(), isEven) << '\n' << '\n';
 
 	// Point A{};
 	// Point B(1, 1);
@@ -258,7 +259,6 @@ int main() {
 	// points4.push_back(Point(-2, 4));
 
 	// std::vector<Point> points5 {Point(), Point(), Point(), Point(1, 0), Point()};
-
 
 	// std::cout << is_palindrome(points.begin(), points.end(), isEqual<Point>) << '\n';
 	// std::cout << is_palindrome(points0.begin(), points0.end(), isEqual<Point>) << '\n';
