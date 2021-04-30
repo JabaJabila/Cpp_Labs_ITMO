@@ -42,12 +42,14 @@ template<class InputIterator, class Comparator>
 bool is_sorted(InputIterator begin, InputIterator end, Comparator p) {
 	InputIterator next = begin;
 	++next;
-	for (; next != end; ++begin) {
-		if (!p(*next, *begin)) {
-			return false;
+	if (begin != end) {
+		for (; next != end; ++begin) {
+			if (!p(*next, *begin)) {
+				return false;
+			}
+			++next;
 		}
-		++next;
-	}	
+	}
 	return true;
 }
 
@@ -64,14 +66,16 @@ bool is_partitioned(InputIterator begin, InputIterator end, UnaryPredicate p) {
 
 template<class InputIterator, class Comparator>
 bool is_palindrome(InputIterator begin, InputIterator end, Comparator p) {
-	--end;
-	while(begin != end) {
-		if (!p(*begin, *end)) 
-			return false;
+	if (begin != end) {
 		--end;
-		if (end == begin)
-			break;
-		++begin;
+		while(begin != end) {
+			if (!p(*begin, *end)) 
+				return false;
+			--end;
+			if (end == begin)
+				break;
+			++begin;
+		}
 	}
 	return true;
 }
