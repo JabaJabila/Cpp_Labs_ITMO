@@ -39,12 +39,12 @@ bool one_of(InputIterator begin, InputIterator end, UnaryPredicate p) {
 }
 
 template<class InputIterator, class Comparator>
-bool is_sorted(InputIterator begin, InputIterator end, Comparator p) {
+bool is_sorted(InputIterator begin, InputIterator end, Comparator c) {
 	InputIterator next = begin;
 	++next;
 	if (begin != end) {
 		for (; next != end; ++begin) {
-			if (!p(*next, *begin)) {
+			if (!c(*begin, *next)) {
 				return false;
 			}
 			++next;
@@ -55,21 +55,22 @@ bool is_sorted(InputIterator begin, InputIterator end, Comparator p) {
 
 template<class InputIterator, class UnaryPredicate>
 bool is_partitioned(InputIterator begin, InputIterator end, UnaryPredicate p) {
-	for (; begin != end; ++begin)
-		if (p(*begin)) 
-			break;
-	for (; begin != end; ++begin)
-		if (!p(*begin)) 
-			return false;			
+	while (begin != end && !p(*begin))
+		++begin;
+	while (begin != end) {
+		if (!p(*begin))
+			return false;
+		++begin;
+	}
 	return true;
 }
 
 template<class InputIterator, class Comparator>
-bool is_palindrome(InputIterator begin, InputIterator end, Comparator p) {
+bool is_palindrome(InputIterator begin, InputIterator end, Comparator c) {
 	if (begin != end) {
 		--end;
 		while(begin != end) {
-			if (!p(*begin, *end)) 
+			if (!c(*begin, *end)) 
 				return false;
 			--end;
 			if (end == begin)
@@ -93,11 +94,12 @@ template<class InputIterator, class T>
 InputIterator find_backward(InputIterator begin, InputIterator end, const T& element) {
 	InputIterator true_end = end;
 	--end;
-	--begin;
-	for (; end != begin; --end)
+	do {
 		if (*end == element) {
 			return end;
-		}	
+		}
+		--end;
+	} while(begin != end);
 	return true_end;
 }
 
@@ -141,11 +143,11 @@ bool isEqual(const T& x, const T& y) {
 
 template<class T>
 bool isGreater(const T& x, const T& y) {
-	return x > y;
+	return x < y;
 }
 
 bool xNotLess(const Point & p1, const Point & p2) {
-	return p1.get_x() >= p2.get_x();
+	return p1.get_x() <= p2.get_x();
 }
 
 bool xPositive(const Point & p) {
@@ -158,7 +160,7 @@ bool yNegative(const Point & p) {
 
 template<class T>
 bool isLess(const T& x, const T& y) {
-	return x < y;
+	return x > y;
 }
 
 bool isEven(const int x) {
