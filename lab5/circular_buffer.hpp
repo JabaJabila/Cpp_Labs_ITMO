@@ -34,7 +34,7 @@ public:
 	  alloc_(other.alloc_),
 	  data_(alloc_.allocate(other.capacity_)) {
 		for (unsigned i = 0; i < capacity_; ++i)
-			data_[i] = other.data_[i];
+			alloc_.construct(&data_[i], other.data_[i]);
 	}
 
 	circular_buffer & operator=(const circular_buffer<T> & other) {
@@ -48,7 +48,7 @@ public:
 			last_ = other.last_;
 			data_ = alloc_.allocate(capacity_);
 			for (unsigned i = 0; i < capacity_; ++i)
-				data_[i] = other.data_[i];
+				alloc_.construct(&data_[i], other.data_[i]);
 		}
 		return *this;
 	}
@@ -90,7 +90,7 @@ public:
 			else
 				++first_;
 		}
-		data_[last_] = element;
+		alloc_.construct(&data_[last_], element);
 		++last_;
 		if (last_ == capacity_)
 			last_ = 0;
@@ -104,7 +104,7 @@ public:
 			else
 				--last_;
 		}
-		data_[first_] = element;
+		alloc_.construct(&data_[first_], element);
 		if (first_ == 0)
 			first_ = capacity_ - 1;
 		else
