@@ -276,12 +276,6 @@ int main() {
        	routes = split_routes(routestr);
        	locations = split_locations(loc);
 
-       	// std::cout << type_vehicle << "\n" << name << "\n" << off_name << "\n";
-       	// std::cout << std::setprecision(10) << coordinates.first << " - " << coordinates.second << "\n";
-       	// for (unsigned i = 0; i < routes.size(); ++i)
-       	// 	std::cout << routes[i] << " ";
-       	// std::cout << "\n";
-
        	for (unsigned i = 0; i < routes.size(); ++i) {
        		if (routes_list.check_route(routes[i], type_vehicle))
        			tmp = routes_list.get_route(routes[i], type_vehicle);

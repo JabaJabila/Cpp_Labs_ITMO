@@ -16,7 +16,7 @@ int main() {
 	std::cout << "Coordinates of point D: (" << D.get_x() << ", " << D.get_y() << ")\n";
 	std::cout << "Coordinates of point E: (" << E.get_x() << ", " << E.get_y() << ")\n";
 	E == A ? std::cout << "Point E equals point A\n" : std::cout << "Point E not equals point A\n";
-	A == B ? std::cout << "Point A equals point B\n" : std::cout << "Point A not equals point B\n";
+	A != B ? std::cout << "Point A not equals point B\n" : std::cout << "Point A equals point B\n";
 
 	Segment s1(A, B);
 	Segment s2(C, D);

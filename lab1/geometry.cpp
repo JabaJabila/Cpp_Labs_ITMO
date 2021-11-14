@@ -77,7 +77,7 @@ double ClosedPolyline::length() const {
 
 void ClosedPolyline::check_closed() {
 	if (points[points.size() - 1] == points[0])
-		points.erase(points.end() - 1);
+		points.pop_back();
 }
 
 
@@ -162,7 +162,7 @@ void Polygon::delete_repeated() {
 			prev = points[i];
 	}
 	if (points[points.size() - 1] == points[0])
-		points.erase(points.end() - 1);
+		points.pop_back();
 }
 
 

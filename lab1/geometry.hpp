@@ -16,6 +16,7 @@ public:
 	double get_x() const {return x;}
 	double get_y() const {return y;}
 	bool operator==(Point const & right) const {return (x == right.x && y == right.y);}
+	bool operator!=(Point const & right) const {return (x != right.x || y != right.y);}
 
 private:
 	double x;

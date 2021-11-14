@@ -46,9 +46,9 @@ void printb(InputIterator begin, InputIterator end) {
 
 int main() {
 
-	circular_buffer<int> itb2 {-1, 0, 1, 2, 3};
-	itb2.push_back(4);
-	itb2.push_back(5);
+	// circular_buffer<int> itb2 {-1, 0, 1, 2, 3};
+	// itb2.push_back(4);
+	// itb2.push_back(5);
 
 	// std::cout << *(itb2.begin() += 1) << " ";
 	// std::cout << *(itb2.begin() += 2) << " ";
@@ -64,19 +64,19 @@ int main() {
 	// std::cout << *(itb2.end() -= 5) << " ";
 	// std::cout << *(itb2.begin() -= -4) << "\n";
 
-	std::cout << (std::binary_search(itb2.begin(), itb2.end(), 1)) << " ";
-	std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 1)) << " ";
-	std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 2)) << " ";
-	std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 3)) << " ";
-	std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 4)) << " ";
-	std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 5)) << " ";
-	std::cout << (std::binary_search(itb2.begin(), itb2.end(), 0)) << "\n";
+	// std::cout << (std::binary_search(itb2.begin(), itb2.end(), 1)) << " ";
+	// std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 1)) << " ";
+	// std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 2)) << " ";
+	// std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 3)) << " ";
+	// std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 4)) << " ";
+	// std::cout << (std::binary_search(itb2.begin() + 1, itb2.end(), 5)) << " ";
+	// std::cout << (std::binary_search(itb2.begin(), itb2.end(), 0)) << "\n";
 
-	std::cout << std::is_heap(itb2.begin(), itb2.end()) << " ";
-	std::make_heap(itb2.begin(), itb2.end());
-	std::cout << std::is_heap(itb2.begin(), itb2.end()) << "\n";
-	for (auto i : itb2)
-		std::cout << i << " ";
+	// std::cout << std::is_heap(itb2.begin(), itb2.end()) << " ";
+	// std::make_heap(itb2.begin(), itb2.end());
+	// std::cout << std::is_heap(itb2.begin(), itb2.end()) << "\n";
+	// for (auto i : itb2)
+	// 	std::cout << i << " ";
 
 	
 	// circular_buffer<int>::iterator iter1 = itb2.begin();
